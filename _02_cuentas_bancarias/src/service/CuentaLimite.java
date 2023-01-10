@@ -6,16 +6,16 @@ que servirá para definir el límite máximo de dinero que se podrá extraer.
 También incluirá un nuevo método, llamado ajustarLimite(), 
 que establecerá automáticamente como límite la mitad del saldo existente*/
 
-public class Limite  extends Cuenta{
+public class CuentaLimite  extends Cuenta{
 	private double limite;
-	public Limite(double saldo, double limite) {
+	public CuentaLimite(double saldo, double limite) {
 		super(saldo);
 		this.limite=limite;
 
 		
 	}
 	
-	public Limite() {
+	public CuentaLimite() {
 		this.limite=50;			
 		
 	}
