@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class ManipulacionService {
 	
@@ -84,6 +85,37 @@ public class ManipulacionService {
 		return suma;	
 	}
 	
+	//metodo que recibe una lista y devuelve la suma de todos los elemntos de la lista , a la que añadimos 
+	//valor extraido de un fichero
+	//metodo que recibe una lista y devuelve la suma de todos los elementos de la lista , a le añadimos 
+	//un numero leido desde un puerto externo
+	public int sumaListaConValor(Collection<Integer> numeros, Supplier<Integer>data) {
+		int suma=0;
+		for(Integer n:numeros) {
+			suma+=n;
+			
+		}
+		return suma+data.get();
+		}
+	
+	//metodo que reciba una lista de cadenas de caracteres y devuelva el total de vocales de aquellas 
+	//que comienzan por "a"
+	//metodo que recibe una lista de cadenas de caracteres y devuelve el total de caracteres de aquellas
+	//que tengan mas de 5 letras
+	
+	public int contarCaracteres(Collection<String> textos,Function<String,Integer>fun,Predicate<String> cond) {
+		int total=0;
+		for(String cad:textos) {
+			if(cond.test(cad)) {
+				total+=fun.apply(cad);
+			}
+			
+		}
+		return total;
+
+
+		
+	}
 }
 
 
