@@ -12,8 +12,12 @@ public class Test2 {
 		nums.stream().distinct().limit(7).forEach(n->System.out.println(n));
 		
 			//hay algun negativo?
-			//son todos pares?
+		System.out.println("Algun negativo? "+nums.stream().
+				anyMatch(n->n<0));
 		
+
+			//son todos pares?
+		System.out.println("Algun par ?"+nums.stream().allMatch(n->n%2==0));
 			
 	}
 

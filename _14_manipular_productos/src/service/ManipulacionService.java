@@ -25,8 +25,7 @@ public class ManipulacionService {
 			return p;
 		});
 	}
-		//sube el precio a los productos que cumplen una con
-	dición
+		//sube el precio a los productos que cumplen una con condición
 		public void subirPrecioConCondicion(int porcentaje, Predicate<Manipulacion> cond) {
 			manipulaciones.replaceAll(p->{
 				if(cond.test(p)) {
