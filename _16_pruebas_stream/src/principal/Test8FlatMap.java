@@ -1,5 +1,6 @@
 package principal;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Test8FlatMap {
@@ -12,6 +13,14 @@ public class Test8FlatMap {
 		new double[]{2.4,5,1.9,6.7},
 		new double[]{5.6,3.2,8,10},
 		new double[]{9.1,4});
+		
+		System.out.println(notas.stream()//Stream<double[]>
+		.flatMapToDouble(a->Arrays.stream(a))
+		.average()
+		.orElse(0));
+		
+		
+		
 	}
 
 }
