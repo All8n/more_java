@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import model.Alumno;
 import model.Curso;
@@ -28,9 +29,9 @@ public class FormacionService {
 	
 	//duracion media de todos los cursos
 	public double duracionMedia() {
-		cursos.stream()
-		.mapToInt(n->n.duracion())
-		.average();
+		return cursos.stream()
+				.collect(Collectors.averagingDouble(c->c.duracion()));
+		
 		
 	}
 	
