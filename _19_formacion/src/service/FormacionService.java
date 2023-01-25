@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -38,19 +39,26 @@ public class FormacionService {
 	//lista de cursos con numeros de alumnos inferior a un determinado valor
 	public List<Curso> cursosInferiorAlumnos(int numAlumnos	){
 			return cursos.stream()
-					.filter(n->n.equals(matriculas))
-					.anyMatch 	(n(matriculas));
-		
+					.filter(n->n.matriculas().size()<numAlumnos)//Stream<Curso>
+					.toList();		
 	}
 	
 	//edad media del curso de una determinada denominacion
 	
 	public double duracionMediaCursos(String denominacion) {
-		
+		return cursos.stream()//Stream<Curso>
+				.filter(c->c.denominacion().equals(denominacion))//Stream<Curso>
+				.flatMap(n->n.matriculas().stream())//Stream<Alumno>
+				.collect(Collectors.averagingDouble(a->a.edad()));//double
 		
 	}
 	//lista de nombres de alumnos
 	public List<String> nombresAlumnos(){
+		return cursos.stream()//Stream<Curso>
+				.flatMap(n->n.matriculas().stream())//Stream<Alumno>
+				.map(a->a.nombre())//Stream<String>
+				.toList();
+		
 		
 		
 	}
@@ -58,12 +66,56 @@ public class FormacionService {
 	//nota media de todos los cursos	
 	
 	public double notaMediaCursos() {
+		return cursos.stream()//Stream<Curso>
+		.flatMap(n->n.matriculas().stream())//Stream<Alumno>
+		.collect(Collectors.averagingDouble(a->a.nota()));//double
+	
+		
 		
 	}
 	
 	//lista de alumnos aprobados 
 	public List<Alumno> aprobados(){
 		
+		return cursos.stream()//Stream<Curso>
+				.flatMap(n->n.matriculas().stream())//Stream<Alumno>
+				.filter(n->n.nota()>=5)//Stream<Alumno>
+				//.collect(Collectors.toList());//List<Alumno>
+				.toList();//igual que el anterior, pero desde java 13
+				
+		
+	}
+	
+	//(lista de nombres de curso
+	public List<String> cursos(){
+		
+		return cursos.stream()//Stream<Curso>
+				.map(c->c.denominacion())//Stream<String>
+				.toList();
+				
+
+	}
+	//nota media del curso de una determinada denominacion 	
+	public double mediaDetCurso(String denominacion) {
+		return cursos.stream()
+				.filter(c->c.denominacion().equals(denominacion))//Stream<Curso>
+				.flatMap(n->n.matriculas().stream())//Stream<Alumno>
+				.collect(Collectors.averagingDouble(a->a.nota()));//double
+		
+	}
+	//lista de alumnos de un curso de un determinada denominacion
+	public List<Alumno> alumnoCurso(String denominacion){
+		/*return cursos.stream()
+				.filter(n->n.denominacion().equals(denominacion))
+				.flatMap(n->n.matriculas().stream())
+				.toList(); */
+		
+		
+		return cursos.stream()
+				.filter(n->n.denominacion().equals(denominacion))
+				.findFirst()
+				.get()
+				.matriculas();
 	}
 
-}
+}	
