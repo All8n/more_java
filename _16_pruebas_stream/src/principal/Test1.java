@@ -12,8 +12,10 @@ public class Test1 {
 		//muestra cada elemento
 		nums.stream().forEach(n->System.out.println(n));
 		//muestra los elementos sin duplicados
-		nums.stream().distinct().forEach(n->System.out.println(n));
-		
+		nums.stream()
+		.distinct()
+		//.forEach(n->System.out.println(n));
+		.forEach(System.out::println);
 		
 	}
 

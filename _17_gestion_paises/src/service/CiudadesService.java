@@ -35,13 +35,17 @@ public class CiudadesService {
 	public Map<String, List<Ciudad>>ciudadesPorPais(){
 		
 						return ciudades.stream()
-								.collect(Collectors.groupingBy(s->s.getPais()));
+								.collect(Collectors.groupingBy(Ciudad::getPais));//referencia metodos
+
+								//.collect(Collectors.groupingBy(s->s.getPais()));
 	}
 	//devuelve total de habitantes de un determinado pais
 	public int habitantesPorPais(String pais){
 		return   ciudades.stream()
 				.filter(c->c.getPais().equals(pais))
-				.collect(Collectors.summingInt(c->c.getHabitantes()));
+			    .collect(Collectors.summingInt(Ciudad::getHabitantes));//referencia metodos
+
+				//.collect(Collectors.summingInt(c->c.getHabitantes()));
 				
 						
 				
@@ -68,6 +72,7 @@ public class CiudadesService {
 	public Ciudad ciudadMasFria() {
 		
 		return 	ciudades.stream()
+		
 		.min((t1,t2)->Double.compare(t1.getTemperatura(), t2.getTemperatura()))
 		.orElse(null);
 				
@@ -76,7 +81,8 @@ public class CiudadesService {
 	//metodo que devuelva el total de paises registrados
 	public int paisesRegistrados() {
 		return (int) ciudades.stream()//Stream<Ciudad>
-				.map(c->c.getPais())//Stream<String> transforma cada objeto del stream en otro objeto(cadena de caracteres)
+				.map(Ciudad::getPais)//referencia metodos
+				//.map(c->c.getPais())//Stream<String> transforma cada objeto del stream en otro objeto(cadena de caracteres)
 				.distinct()//Stream<String>
 				.count();
 		
@@ -88,7 +94,8 @@ public class CiudadesService {
 	public OptionalDouble mediaPiases(String pais) {
 		return 	ciudades.stream()
 				.filter(c->c.getPais().equals(pais))
-				.mapToDouble(c->c.getTemperatura())
+				.mapToDouble(Ciudad::getTemperatura)//referencia metodos
+				//.mapToDouble(c->c.getTemperatura())
 				.average();
 			
 	}

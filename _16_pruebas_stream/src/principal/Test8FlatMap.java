@@ -15,7 +15,8 @@ public class Test8FlatMap {
 		new double[]{9.1,4});
 		
 		System.out.println(notas.stream()//Stream<double[]>
-		.flatMapToDouble(a->Arrays.stream(a))
+		
+	   .flatMapToDouble(a->Arrays.stream(a))
 		.average()
 		.orElse(0));
 		

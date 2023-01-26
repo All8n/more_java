@@ -9,7 +9,10 @@ public class Test2 {
 
 		
 		//muestra los 7 primeros numeros de la lita, sin contar duplicados
-		nums.stream().distinct().limit(7).forEach(n->System.out.println(n));
+		nums.stream()
+		.distinct()
+		.limit(7)
+		.forEach(System.out::println);
 		
 			//hay algun negativo?
 		System.out.println("Algun negativo? "+nums.stream().

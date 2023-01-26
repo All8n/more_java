@@ -15,7 +15,7 @@ public class Test5Ordenacion {
 		.sorted()
 		.findFirst()//Optional<Integer>
 		//si hay un valor lo muestra y si no, no hace nada
-		.ifPresentOrElse(n->System.out.println(n), ()->System.out.println("No hay ningun negativo"));
+		.ifPresentOrElse(System.out::println, ()->System.out.println("No hay ningun negativo"));
 
 	}
 

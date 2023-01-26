@@ -17,14 +17,16 @@ public class Test7Map {
 		
 		nombres.stream()
 		.distinct()//Stream<String>
-		.map(s->s.length())//Stream<Integer>
+		.map(String::length)
+		//.map(s->s.length())//Stream<Integer>
 		.filter(n->n>6)
 		.count();
 		
 		//suma total de caracteres de todas las cadenas no repetidas
 		System.out.println(nombres.stream()
 		.distinct()//Stream<String>
-		.mapToInt(s->s.length())//intStream
+		.mapToInt(String::length)
+		//.mapToInt(s->s.length())//intStream
 		.sum());
 	}
 
